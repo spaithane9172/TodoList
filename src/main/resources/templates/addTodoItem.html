@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Todo Item</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="mt-16 p-4 w-full 2xl:mt-14 2xl:ml-36 2xl:p-0">
+      <h1 class="font-bold text-4xl mb-10 text-center 2xl:text-left">
+        Add Todo Item
+      </h1>
+      <form
+        action="saveTodoItem"
+        method="POST"
+        th:object="${myTodo}"
+        class="px-10 2xl:px-0"
+      >
+        <p for="title" class="mb-4">Title</p>
+        <input
+          type="text"
+          name="title"
+          class="p-2 w-[70vw] 2xl:w-[30vw] border-2 border-black border-solid rounded-lg mb-6"
+          required
+        />
+        <p for="date" class="mb-4">Date</p>
+        <input
+          type="date"
+          name="date"
+          class="p-2 w-[70vw] 2xl:w-[30vw] border-2 border-black border-solid rounded-lg mb-6"
+          required
+        />
+        <p for="stutus" class="mb-4">Status</p>
+        <input
+          type="text"
+          name="status"
+          class="p-2 w-[70vw] 2xl:w-[30vw] border-2 border-black border-solid rounded-lg mb-12"
+          required
+        />
+        <div>
+          <button
+            type="submit"
+            class="w-fit 2xl:w-[30vw] bg-green-600 hover:bg-green-700 py-2 px-6 font-bold text-white"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

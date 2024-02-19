@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="2xl:flex 2xl:justify-end 2xl:w-full">
+      <div
+        id="toast"
+        th:if="${msgType}=='success'"
+        class="w-[90vw] 2xl:w-[30vw] bg-green-200 p-4 top-[-13px] rounded-sm m-5 flex flex-row justify-between absolute"
+      >
+        <div class="flex flex-row">
+          <img
+            th:src="@{/img/successIcon.png}"
+            class="w-[6vw] h-[3vh] 2xl:w-[1.5vw] 2xl:h-[3vh] mx-5"
+          />
+          <p th:text="${message}"></p>
+        </div>
+        <div class="">
+          <p class="font-bold mr-6 cursor-pointer" onclick="onOff()">X</p>
+        </div>
+      </div>
+
+      <div
+        id="toast"
+        th:if="${msgType}=='faild'"
+        class="w-[90vw] 2xl:w-[30vw] top-[-13px] bg-red-200 p-4 rounded-sm m-5 flex flex-row justify-between"
+      >
+        <div class="flex flex-row">
+          <img
+            th:src="@{/img/faildIcon.png}"
+            class="w-[6vw] h-[3vh] 2xl:w-[1.5vw] 2xl:h-[3vh] mx-5"
+          />
+          <p th:text="${message}"></p>
+        </div>
+        <div class="">
+          <p class="font-bold mr-6 cursor-pointer" onclick="onOff()">X</p>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="text-center font-bold text-4xl mt-10 2xl:mt-14">Todo List</h1>
+    <div
+      class="2xl:flex 2xl:justify-center mt-10 overflow-x-scroll overflow-y-scroll 2xl:overflow-x-hidden h-[75vh] 2xl:h-[65vh]"
+    >
+      <table class="table-auto mx-2 2xl:mx-16">
+        <thead class="border-2 border-solid border-black rounded-lg">
+          <tr class="sticky top-[-6px] bg-white">
+            <th class="p-4 border-2 border-solid border-black 2xl:px-10">Id</th>
+            <th class="py-4 px-36 border-2 border-solid border-black">Title</th>
+            <th class="p-4 px-16 border-2 border-solid border-black">Date</th>
+            <th class="p-4 px-16 border-2 border-solid border-black">Status</th>
+            <th class="p-4 2xl:px-16 border-2 border-solid border-black">
+              Mark Completed
+            </th>
+            <th class="p-4 px-14 2xl:px-16 border-2 border-solid border-black">
+              Edit
+            </th>
+            <th class="p-4 px-14 2xl:px-16 border-2 border-solid border-black">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="lst : ${list}">
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+              th:text="${lst.id}"
+            ></td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+              th:text="${lst.title}"
+            ></td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+              th:text="${lst.date}"
+            ></td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+              th:text="${lst.status}"
+            ></td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+            >
+              <a
+                th:href="'updateTodoStatus/'+${lst.id}"
+                class="bg-green-600 hover:bg-green-700 text-white rounded-lg py-2 px-6 font-bold"
+              >
+                Mark Completed</a
+              >
+            </td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+            >
+              <a
+                th:href="'editTodoItem/'+${lst.id}"
+                class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 px-6 font-bold"
+                >Edit</a
+              >
+            </td>
+            <td
+              class="text-center text-lg py-3 border-2 border-solid border-black"
+            >
+              <a
+                th:href="'deleteTodoItem/'+${lst.id}"
+                class="bg-red-600 hover:bg-red-700 text-white rounded-lg py-2 px-6 font-bold"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex justify-center">
+      <a
+        href="addTodoItem"
+        class="absolute mx-10 text-center text-xl font-bold bg-blue-600 rounded-lg mt-6 p-4 text-white hover:bg-blue-700"
+        >Add New Todo Item</a
+      >
+    </div>
+    <script src="/js/toast.js"></script>
+  </body>
+</html>
